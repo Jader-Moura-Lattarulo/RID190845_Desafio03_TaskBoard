@@ -1,12 +1,15 @@
-html {
-    background-color: #F5F5F5;
-    font-size: 10px;
-    box-sizing: border-box;
-}
-
-.taskList {
+.taskItem {
     list-style-type: none;
     letter-spacing: 0px;
+    margin-bottom: .8rem;
+}
+
+.taskItem:first-child {
+    margin-top: 2.4rem;
+}
+
+.taskItem:last-child {
+    margin-bottom: 0;
 }
 
 .component-container {
@@ -14,16 +17,16 @@ html {
     width: 100%;
     max-width: 54rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-family: "Inter", sans-serif;
     border-radius: 1.6rem;
     gap: 1rem;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #B1BACB50;
 }
 
-.text-conteiner {
-    margin: 0;
+.text-container {
+    margin-left: 3.2rem;
 }
 
 .component-title {
@@ -53,23 +56,6 @@ html {
     letter-spacing: 0.1px;
 }
 
-.conclude-btn {
-    width: 12.1rem;
-    height: 4.4rem;
-    border-radius: .4rem;
-    border: none;
-    background: #2D70FD;
-    color: #FFFFFF;
-    font-size: 1.8rem;
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
-}
-
-.conclude-btn:hover {
-    opacity: 0.8;
-}
-
 .hidden-button {
     display: none;
     pointer-events: none;
@@ -77,7 +63,7 @@ html {
 
 .checked-mark {
     height: 3.2rem;
-    width: 12.1rem;
+    width: 9.5rem;
     text-align: center;
 }
 

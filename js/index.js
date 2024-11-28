@@ -4,6 +4,18 @@ let tasks = [
     { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
 ];
 
+const markDone = (taskId) =>{ 
+    const taskItem = document.getElementById(`task-${taskId}`);
+    const taskTitle = taskItem.querySelector('.component-title');
+    const button = taskItem.querySelector('.conclude-btn');
+    const chekedMark = taskItem.querySelector('.checked-mark');
+    
+    taskTitle.style.color ='#B1BACB';
+    taskTitle.style.textDecorationLine = 'line-through';
+    button.classList.add('hidden-button');
+    chekedMark.classList.remove('hidden-mark');
+}
+
 window.onload = () => {    
     tasks.forEach((task, index) => {
         const list = document.getElementById('task-list');
@@ -46,6 +58,7 @@ window.onload = () => {
         const concludeBtn = document.createElement('button');
         concludeBtn.classList.add('conclude-btn');
         concludeBtn.textContent = 'Concluir';
+        concludeBtn.addEventListener('click', () => markDone(task.id));
 
         const checkedMark = document.createElement('div');
         checkedMark.classList.add('checked-mark', 'hidden-mark');
@@ -62,7 +75,6 @@ window.onload = () => {
         componentContainer.appendChild(buttonContainer);
 
         taskItem.appendChild(componentContainer);
-
         list.appendChild(taskItem);
     });    
 }

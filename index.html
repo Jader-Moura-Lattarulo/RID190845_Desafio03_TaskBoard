@@ -5,46 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Board</title>
     <link rel="stylesheet" href="/styles/styles.css" />
-    <link rel="stylesheet" href="/styles/task-card.css">
+    <link rel="stylesheet" href="/styles/task-card.css" />
     <script src="/js/index.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <h1>Board de Tarefas</h1>
-        
-        <section id="create-task-section">
-            <form id="create-task-form">
-                <input
-                type="text"
-                id="description"
-                name="description"
-                class="input-description_tag"
-                aria-label="Nome da tarefa"
-                placeholder="Nome da tarefa"
-                />
-                <input
-                type="text"
-                id="tag"
-                name="tag"
-                class="input-description_tag"
-                aria-label="Etiqueta"
-                placeholder="Etiqueta"
-                />
-                <button
-                id="save-task"
-                type="submit"
-                aria-label="Cadastrar tarefa"
-                class="add-task-btn"
-                >
-                +
-            </button>
+      <h1>Board de Tarefas</h1>
+
+      <section id="create-task-section">
+        <form id="create-task-form">
+          <input
+            type="text"
+            id="descriptionInput"
+            name="descriptionInput"
+            class="input-description_tag"
+            aria-label="Nome da tarefa"
+            placeholder="Nome da tarefa"
+          />
+          <input
+            type="text"
+            id="tagInput"
+            name="tagInput"
+            class="input-description_tag"
+            aria-label="Etiqueta"
+            placeholder="Etiqueta"
+          />
+          <button
+            id="save-task"
+            type="submit"
+            aria-label="Cadastrar tarefa"
+            class="add-task-btn"
+          >
+            +
+          </button>
         </form>
-    </section>
-    
-    <section class="task-list-section">
+      </section>
+
+      <section class="task-list-section">
         <ul id="task-list" class="taskList"></ul>
-    </section>
-    <footer id="task-footer"></footer>
-</main>
-</body>
+      </section>
+      <footer id="task-footer">
+        1 tarefa concluída
+      </footer>
+    </main>
+  </body>
 </html>
