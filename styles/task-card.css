@@ -1,0 +1,86 @@
+html {
+    background-color: #F5F5F5;
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+.taskList {
+    list-style-type: none;
+    letter-spacing: 0px;
+}
+
+.component-container {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 54rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    border-radius: 1.6rem;
+    gap: 1rem;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.text-conteiner {
+    margin: 0;
+}
+
+.component-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 2.6rem 0 0 0;
+}
+
+.tag_date-container {
+    color: #B1BACB;
+    display: flex;
+    margin: 0;
+}
+
+#tag {
+    border: 1.3px solid;
+    border-radius: 1.6rem;
+    padding: .3rem .65rem;
+    font-size: 1.2rem;
+    margin: 1.2rem 0 2.6rem 0;
+    letter-spacing: 0.7px;
+}
+
+#date {
+    font-size: 1.4rem;
+    margin: 1.4rem 1rem;
+    letter-spacing: 0.1px;
+}
+
+.conclude-btn {
+    width: 12.1rem;
+    height: 4.4rem;
+    border-radius: .4rem;
+    border: none;
+    background: #2D70FD;
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.conclude-btn:hover {
+    opacity: 0.8;
+}
+
+.hidden-button {
+    display: none;
+    pointer-events: none;
+}
+
+.checked-mark {
+    height: 3.2rem;
+    width: 12.1rem;
+    text-align: center;
+}
+
+.hidden-mark {
+    display: none;
+}
