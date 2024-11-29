@@ -1,8 +1,25 @@
+const saveTaskBtn = document.querySelector('#save-task');
+
 let tasks = [
     { id: 1, description: 'Implementar tela de listagem de tarefas', tag: 'frontend', date: '27/11/2024', done: false },
     { id: 2, description: 'Criar endpoint para cadastro de tarefas', tag: 'backend', date: '27/11/2024', done: false },
     { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
 ];
+
+const createTask = (description, tag) => {
+    const id = tasks.length + 1;
+    
+    console.log(id, description, tag);
+}
+
+saveTaskBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const description = document.querySelector('#descriptionInput').value;
+    const tag = document.querySelector('#tagInput').value;
+
+    createTask(description, tag);
+});
 
 const markDone = (taskId) =>{ 
     const taskItem = document.getElementById(`task-${taskId}`);
