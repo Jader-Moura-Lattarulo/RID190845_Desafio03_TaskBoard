@@ -6,6 +6,75 @@ let tasks = [
     { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
 ];
 
+const updateTaskList = () => {
+    if(tasks.length > 0) {
+        const taskList = document.getElementById('task-list');
+
+        taskList.innerHTML = '';
+
+        tasks.forEach((task, index) => {
+            const list = document.getElementById('task-list');
+    
+            const taskItem = document.createElement('li');
+            taskItem.classList.add('taskItem');
+            taskItem.id = `task-${index + 1}`;
+    
+            const componentContainer = document.createElement('div');
+            componentContainer.classList.add('component-container');
+    
+            const textContainer = document.createElement('div');
+            textContainer.classList.add('text-container');
+    
+            const taskTitle = document.createElement('h2');
+            taskTitle.id = 'taskTitle';
+            taskTitle.classList.add('component-title');
+            taskTitle.textContent = task.description;
+    
+            const tagDateContainer = document.createElement('div');
+            tagDateContainer.classList.add('tag_date-container');
+    
+            const tag = document.createElement('p');
+            tag.id = 'tag';
+            tag.textContent = task.tag;
+    
+            const date = document.createElement('p');
+            date.id = 'date';
+            date.textContent = `Criado em: ${task.date}`;
+    
+            tagDateContainer.appendChild(tag);
+            tagDateContainer.appendChild(date);
+    
+            textContainer.appendChild(taskTitle);
+            textContainer.appendChild(tagDateContainer);
+    
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('button-container');
+    
+            const concludeBtn = document.createElement('button');
+            concludeBtn.classList.add('conclude-btn');
+            concludeBtn.textContent = 'Concluir';
+            concludeBtn.addEventListener('click', () => markDone(task.id));
+    
+            const checkedMark = document.createElement('div');
+            checkedMark.classList.add('checked-mark', 'hidden-mark');
+    
+            const checkedImg = document.createElement('img');
+            checkedImg.src = '/images/checked-mark.svg';
+            checkedImg.alt = 'checked-mark';
+            checkedMark.appendChild(checkedImg);
+    
+            buttonContainer.appendChild(concludeBtn);
+            buttonContainer.appendChild(checkedMark);
+    
+            componentContainer.appendChild(textContainer);
+            componentContainer.appendChild(buttonContainer);
+    
+            taskItem.appendChild(componentContainer);
+            list.appendChild(taskItem);
+        });    
+    }
+}
+
 const getTaskDate = () => {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
@@ -26,7 +95,10 @@ const createTask = (description, tag) => {
 
     const newTask = {id: id, description: description, tag: tag, date: date, done: false};
 
+    console.log(newTask);
+
     tasks.push(newTask);
+    updateTaskList();
 }
 
 saveTaskBtn.addEventListener('click', (event) => {
@@ -51,64 +123,5 @@ const markDone = (taskId) =>{
 }
 
 window.onload = () => {    
-    tasks.forEach((task, index) => {
-        const list = document.getElementById('task-list');
-
-        const taskItem = document.createElement('li');
-        taskItem.classList.add('taskItem');
-        taskItem.id = `task-${index + 1}`;
-
-        const componentContainer = document.createElement('div');
-        componentContainer.classList.add('component-container');
-
-        const textContainer = document.createElement('div');
-        textContainer.classList.add('text-container');
-
-        const taskTitle = document.createElement('h2');
-        taskTitle.id = 'taskTitle';
-        taskTitle.classList.add('component-title');
-        taskTitle.textContent = task.description;
-
-        const tagDateContainer = document.createElement('div');
-        tagDateContainer.classList.add('tag_date-container');
-
-        const tag = document.createElement('p');
-        tag.id = 'tag';
-        tag.textContent = task.tag;
-
-        const date = document.createElement('p');
-        date.id = 'date';
-        date.textContent = `Criado em: ${task.date}`;
-
-        tagDateContainer.appendChild(tag);
-        tagDateContainer.appendChild(date);
-
-        textContainer.appendChild(taskTitle);
-        textContainer.appendChild(tagDateContainer);
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container');
-
-        const concludeBtn = document.createElement('button');
-        concludeBtn.classList.add('conclude-btn');
-        concludeBtn.textContent = 'Concluir';
-        concludeBtn.addEventListener('click', () => markDone(task.id));
-
-        const checkedMark = document.createElement('div');
-        checkedMark.classList.add('checked-mark', 'hidden-mark');
-
-        const checkedImg = document.createElement('img');
-        checkedImg.src = '/images/checked-mark.svg';
-        checkedImg.alt = 'checked-mark';
-        checkedMark.appendChild(checkedImg);
-
-        buttonContainer.appendChild(concludeBtn);
-        buttonContainer.appendChild(checkedMark);
-
-        componentContainer.appendChild(textContainer);
-        componentContainer.appendChild(buttonContainer);
-
-        taskItem.appendChild(componentContainer);
-        list.appendChild(taskItem);
-    });    
+    updateTaskList();
 }
