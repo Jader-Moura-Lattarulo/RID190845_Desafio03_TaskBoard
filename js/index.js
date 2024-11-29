@@ -6,8 +6,13 @@ let tasks = [
     { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
 ];
 
+const getNewTaskId = () => {
+    const lastId = tasks[tasks.length - 1]?.id;
+    return lastId ? lastId + 1 : 1;
+}
+
 const createTask = (description, tag) => {
-    const id = tasks.length + 1;
+    const id = getNewTaskId();
     
     console.log(id, description, tag);
 }
