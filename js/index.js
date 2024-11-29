@@ -24,7 +24,9 @@ const createTask = (description, tag) => {
     const id = getNewTaskId();
     const date = getTaskDate();
 
-    console.log(id, description, tag, date);
+    const newTask = {id: id, description: description, tag: tag, date: date, done: false};
+
+    tasks.push(newTask);
 }
 
 saveTaskBtn.addEventListener('click', (event) => {
