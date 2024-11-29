@@ -6,6 +6,15 @@ let tasks = [
     { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
 ];
 
+const getTaskDate = () => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+
+    return `${day}/${month}/${year}`;
+}
+
 const getNewTaskId = () => {
     const lastId = tasks[tasks.length - 1]?.id;
     return lastId ? lastId + 1 : 1;
@@ -13,8 +22,9 @@ const getNewTaskId = () => {
 
 const createTask = (description, tag) => {
     const id = getNewTaskId();
-    
-    console.log(id, description, tag);
+    const date = getTaskDate();
+
+    console.log(id, description, tag, date);
 }
 
 saveTaskBtn.addEventListener('click', (event) => {
