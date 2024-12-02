@@ -2,11 +2,24 @@ const saveTaskBtn = document.querySelector('#save-task');
 
 tasks = [];
 
+const progressCounter = () => {
+    const completedTaksCounterDisplay = document.getElementById('task-footer');
+    const tasks = getTasksFromLocalStorage();
+
+    const doneTasks = tasks.filter(({ done }) => done).length;
+    let text;
+
+    if (doneTasks === 0) text = `Nenhuma tarefa concluída`;
+    if (doneTasks === 1) text = `${doneTasks} tarefa concluída`;
+    if (doneTasks >= 2) text = `${doneTasks} tarefas concluídas`;
+
+    completedTaksCounterDisplay.textContent = text;
+} 
+
 const getTasksFromLocalStorage = () => {
     const localTasks = JSON.parse(localStorage.getItem('tasks'));
     return localTasks ? localTasks : [];
 }
-
 
 const updateTaskList = () => {
 
@@ -103,7 +116,7 @@ const getTaskDate = () => {
 }
 
 const getNewTaskId = () => {
-    const taskList = JSON.parse(localStorage.getItem('tasks'));
+    const taskList = JSON.parse(localStorage.getItem('tasks')) || [];
     const lastId = taskList[taskList.length - 1]?.id;
 
     return lastId ? lastId + 1 : 1;
@@ -123,6 +136,7 @@ const createTask = (description, tag) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
     updateTaskList(tasks);
+    progressCounter();
 }
 
 saveTaskBtn.addEventListener('click', (event) => {
@@ -139,6 +153,7 @@ taskDone = (taskId) => {
     
     task.done = true;
     
+    progressCounter();
     markDone(taskId);
 }
 
@@ -151,9 +166,11 @@ const markDone = (taskId) =>{
         taskList[taskIndex].done = true;
         localStorage.setItem('tasks', JSON.stringify(taskList));
         updateTaskList();
+        progressCounter();
     }
 }
 
 window.onload = () => {    
     updateTaskList();
+    progressCounter();
 }
