@@ -100,3 +100,8 @@ input:focus {
     font-size: 1.6rem;
     color: #B1BACB;
 }
+
+.task-done {
+    color: #B1BACB;
+    text-decoration: line-through;
+}

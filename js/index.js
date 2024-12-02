@@ -6,12 +6,16 @@ const progressCounter = () => {
     const completedTaksCounterDisplay = document.getElementById('task-footer');
     const tasks = getTasksFromLocalStorage();
 
+    const thereIsTasks = tasks.length;
     const doneTasks = tasks.filter(({ done }) => done).length;
-    let text;
-
-    if (doneTasks === 0) text = `Nenhuma tarefa concluída`;
-    if (doneTasks === 1) text = `${doneTasks} tarefa concluída`;
-    if (doneTasks >= 2) text = `${doneTasks} tarefas concluídas`;
+    
+    let text = (thereIsTasks === 0)
+        ? `Lista vazia`
+        : (doneTasks === 0) 
+            ? `Nenhuma tarefa concluída`
+            : (doneTasks === 1)
+                ? `${doneTasks} tarefa concluída`
+                : `${doneTasks} tarefas concluídas`;
 
     completedTaksCounterDisplay.textContent = text;
 } 
@@ -98,6 +102,8 @@ const updateTaskList = () => {
                 buttonContainer.appendChild(checkedMark);
                 componentContainer.appendChild(textContainer);
                 componentContainer.appendChild(buttonContainer);
+
+                taskTitle.classList.add('task-done');
             }
             
             taskItem.appendChild(componentContainer);
@@ -116,7 +122,7 @@ const getTaskDate = () => {
 }
 
 const getNewTaskId = () => {
-    const taskList = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskList = getTasksFromLocalStorage() || [];
     const lastId = taskList[taskList.length - 1]?.id;
 
     return lastId ? lastId + 1 : 1;
@@ -142,10 +148,13 @@ const createTask = (description, tag) => {
 saveTaskBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
-    const description = document.querySelector('#descriptionInput').value;
-    const tag = document.querySelector('#tagInput').value;
+    const description = document.getElementById('descriptionInput').value;
+    const tag = document.getElementById('tagInput').value;
 
     createTask(description, tag);
+
+    document.getElementById('descriptionInput').value = '';
+    document.getElementById('tagInput').value = '';
 });
 
 taskDone = (taskId) => {
