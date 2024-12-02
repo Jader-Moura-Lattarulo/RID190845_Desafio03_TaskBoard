@@ -46,29 +46,42 @@ const updateTaskList = () => {
     
             textContainer.appendChild(taskTitle);
             textContainer.appendChild(tagDateContainer);
-    
-            const buttonContainer = document.createElement('div');
-            buttonContainer.classList.add('button-container');
-    
-            const concludeBtn = document.createElement('button');
-            concludeBtn.classList.add('conclude-btn');
-            concludeBtn.textContent = 'Concluir';
-            concludeBtn.addEventListener('click', () => markDone(task.id));
-    
-            const checkedMark = document.createElement('div');
-            checkedMark.classList.add('checked-mark', 'hidden-mark');
-    
-            const checkedImg = document.createElement('img');
-            checkedImg.src = '/images/checked-mark.svg';
-            checkedImg.alt = 'checked-mark';
-            checkedMark.appendChild(checkedImg);
-    
-            buttonContainer.appendChild(concludeBtn);
-            buttonContainer.appendChild(checkedMark);
-    
-            componentContainer.appendChild(textContainer);
-            componentContainer.appendChild(buttonContainer);
-    
+            
+            if (!task.done) {
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('button-container');
+
+                const concludeBtn = document.createElement('button');
+                concludeBtn.classList.add('conclude-btn');
+                concludeBtn.textContent = 'Concluir';
+                concludeBtn.addEventListener('click', () => taskDone(task.id));
+                buttonContainer.appendChild(concludeBtn);
+                
+                const checkedMark = document.createElement('div');
+                checkedMark.classList.add('checked-mark', 'hidden-mark');
+                
+                const checkedImg = document.createElement('img');
+                checkedImg.src = '/images/checked-mark.svg';
+                checkedImg.alt = 'checked-mark';
+                checkedMark.appendChild(checkedImg);
+                buttonContainer.appendChild(checkedMark);
+                componentContainer.appendChild(textContainer);
+                componentContainer.appendChild(buttonContainer);
+            } else {
+                const buttonContainer = document.createElement('div');
+                                
+                const checkedMark = document.createElement('div');
+                checkedMark.classList.add('checked-mark');
+                
+                const checkedImg = document.createElement('img');
+                checkedImg.src = '/images/checked-mark.svg';
+                checkedImg.alt = 'checked-mark';
+                checkedMark.appendChild(checkedImg);
+                buttonContainer.appendChild(checkedMark);
+                componentContainer.appendChild(textContainer);
+                componentContainer.appendChild(buttonContainer);
+            }
+            
             taskItem.appendChild(componentContainer);
             list.appendChild(taskItem);
         });    
@@ -109,6 +122,14 @@ saveTaskBtn.addEventListener('click', (event) => {
 
     createTask(description, tag);
 });
+
+taskDone = (taskId) => {
+    const task = document.getElementById(`task-${taskId}`);
+    
+    task.done = true;
+    
+    markDone(taskId);
+}
 
 const markDone = (taskId) =>{ 
     const taskItem = document.getElementById(`task-${taskId}`);

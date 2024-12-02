@@ -63,8 +63,12 @@
 
 .checked-mark {
     height: 3.2rem;
-    width: 9.5rem;
-    text-align: center;
+    width: 15.3rem;
+    text-align: end;
+}
+
+img {
+    margin-right: 3.2rem;
 }
 
 .hidden-mark {
