@@ -1,18 +1,23 @@
 const saveTaskBtn = document.querySelector('#save-task');
 
-let tasks = [
-    { id: 1, description: 'Implementar tela de listagem de tarefas', tag: 'frontend', date: '27/11/2024', done: false },
-    { id: 2, description: 'Criar endpoint para cadastro de tarefas', tag: 'backend', date: '27/11/2024', done: false },
-    { id: 3, description: 'Implementar protótipo da listagem de tarefas', tag: 'ux', date: '27/11/2024', done: true }
-];
+tasks = [];
+
+const getTasksFromLocalStorage = () => {
+    const localTasks = JSON.parse(localStorage.getItem('tasks'));
+    return localTasks ? localTasks : [];
+}
+
 
 const updateTaskList = () => {
-    if(tasks.length > 0) {
+
+    const newTaskList = JSON.parse(localStorage.getItem('tasks'));
+    
+    if(newTaskList.length > 0) {
         const taskList = document.getElementById('task-list');
 
         taskList.innerHTML = '';
 
-        tasks.forEach((task, index) => {
+        newTaskList.forEach((task, index) => {
             const list = document.getElementById('task-list');
     
             const taskItem = document.createElement('li');
@@ -98,11 +103,14 @@ const getTaskDate = () => {
 }
 
 const getNewTaskId = () => {
-    const lastId = tasks[tasks.length - 1]?.id;
+    const taskList = JSON.parse(localStorage.getItem('tasks'));
+    const lastId = taskList[taskList.length - 1]?.id;
+
     return lastId ? lastId + 1 : 1;
 }
 
 const createTask = (description, tag) => {
+    const tasks = getTasksFromLocalStorage();
     const id = getNewTaskId();
     const date = getTaskDate();
 
@@ -111,7 +119,10 @@ const createTask = (description, tag) => {
     console.log(newTask);
 
     tasks.push(newTask);
-    updateTaskList();
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    updateTaskList(tasks);
 }
 
 saveTaskBtn.addEventListener('click', (event) => {
@@ -132,15 +143,15 @@ taskDone = (taskId) => {
 }
 
 const markDone = (taskId) =>{ 
-    const taskItem = document.getElementById(`task-${taskId}`);
-    const taskTitle = taskItem.querySelector('.component-title');
-    const button = taskItem.querySelector('.conclude-btn');
-    const chekedMark = taskItem.querySelector('.checked-mark');
-    
-    taskTitle.style.color ='#B1BACB';
-    taskTitle.style.textDecorationLine = 'line-through';
-    button.classList.add('hidden-button');
-    chekedMark.classList.remove('hidden-mark');
+
+    const taskList = getTasksFromLocalStorage();
+    const taskIndex = taskList.findIndex(task => task.id === taskId);
+
+    if (taskIndex !== -1) {
+        taskList[taskIndex].done = true;
+        localStorage.setItem('tasks', JSON.stringify(taskList));
+        updateTaskList();
+    }
 }
 
 window.onload = () => {    
