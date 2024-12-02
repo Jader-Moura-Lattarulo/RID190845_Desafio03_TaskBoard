@@ -23,11 +23,11 @@ const getTasksFromLocalStorage = () => {
 
 const updateTaskList = () => {
 
-    const newTaskList = JSON.parse(localStorage.getItem('tasks'));
+    const newTaskList = getTasksFromLocalStorage();
     
     if(newTaskList.length > 0) {
         const taskList = document.getElementById('task-list');
-
+        
         taskList.innerHTML = '';
 
         newTaskList.forEach((task, index) => {
